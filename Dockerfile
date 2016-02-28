@@ -25,7 +25,7 @@ RUN apt-get install php5 libapache2-mod-php5 php5-mcrypt php5-cli php5-curl php5
 RUN rm -Rf /var/www/html
 
 RUN apt-get install git -y
-RUN git clone https://github.com/easychen/KODExplorer.git  /var/www/html
+RUN git clone https://github.com/lolihui/KODExplorer.git  /var/www/html
 
 
 # 安装aria2
