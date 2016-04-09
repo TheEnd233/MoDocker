@@ -1,25 +1,28 @@
-FROM ubuntu:trusty
+FROM ubuntu:xenial
 MAINTAINER EasyChen <easychen@gmail.com>
 
 # 添加商业软件源
-#deb http://archive.ubuntu.com/ubuntu trusty multiverse
-#deb http://archive.ubuntu.com/ubuntu trusty-updates multiverse
+#deb http://archive.ubuntu.com/ubuntu xenial multiverse
+#deb http://archive.ubuntu.com/ubuntu xenial-updates multiverse
 
-RUN echo "deb http://archive.ubuntu.com/ubuntu trusty multiverse" >> /etc/apt/sources.list
-RUN echo "deb http://archive.ubuntu.com/ubuntu trusty-updates multiverse" >> /etc/apt/sources.list
+RUN echo "deb http://archive.ubuntu.com/ubuntu xenial multiverse" >> /etc/apt/sources.list
+RUN echo "deb http://archive.ubuntu.com/ubuntu xenial-updates multiverse" >> /etc/apt/sources.list
 
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E5267A6C
+
+#apache2
+RUN echo "deb http://ppa.launchpad.net/ondrej/apache2/ubuntu xenial main" >> /etc/apt/sources.list
+RUN echo "deb-src http://ppa.launchpad.net/ondrej/apache2/ubuntu xenial main " >> /etc/apt/sources.list
+
+RUN sed -i 's/archive.ubuntu.com/jp.archive.ubuntu.com/g' /etc/apt/sources.list
 # 先更新apt-get
-RUN apt-get update && apt-get upgrade -y
+RUN apt-get update && apt-get dist-upgrade -y
 
 # 安装unrar
-RUN apt-get install unrar -y
-RUN apt-get install p7zip-full p7zip-rar -y
-#RUN apt-get install p7zip-rar -y
+RUN apt-get install unrar p7zip-full p7zip-rar -y
 
 # 安装PHP和Apache
-RUN apt-get install apache2 -y
-RUN apt-get install php5 libapache2-mod-php5 php5-mcrypt php5-cli php5-curl php5-gd -y
-
+RUN apt-get install apache2=2.4.18-1+deb.sury.org~xenial+2 php libapache2-mod-php php-mcrypt php-cli php-curl php-gd -y
 
 # 安装WebApp
 RUN rm -Rf /var/www/html
