@@ -22,7 +22,7 @@ RUN apt-get update && apt-get dist-upgrade -y
 RUN apt-get install unrar p7zip-full p7zip-rar -y
 
 # 安装PHP和Apache
-RUN apt-get install apache2-bin=2.4.18-1+deb.sury.org~xenial+2 apache2-data=2.4.18-1+deb.sury.org~xenial+2 apache2=2.4.18-1+deb.sury.org~xenial+2 php libapache2-mod-php php-mcrypt php-cli php-curl php-gd php-mbstring -y
+RUN apt-get install apache2-bin apache2-data apache2 php libapache2-mod-php php-mcrypt php-cli php-curl php-gd php-mbstring -y
 
 # 安装WebApp
 RUN rm -Rf /var/www/html
