@@ -38,6 +38,6 @@ WORKDIR /var/www/html/comic
 VOLUME /var/www/html/comic
 
 
-EXPOSE 80 6800
+EXPOSE 80 6800 443
 
 CMD /cldata/init.sh
