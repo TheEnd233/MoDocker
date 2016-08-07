@@ -8,7 +8,7 @@ $file = '/cldata/aria2.conf';
 file_put_contents( $file , str_replace('{{token}}' , $token , file_get_contents($file)));
 
 // 替换yaaw中的TOEKN
-$file = '/var/www/html/js/yaaw.js';
+$file = '/var/www/html/download.html';
 file_put_contents( $file , str_replace('{{token}}' , $token , file_get_contents($file)));
 
 function gen_token()

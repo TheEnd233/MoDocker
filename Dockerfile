@@ -8,13 +8,7 @@ MAINTAINER HuiHui <0w0@loli.pet>
 RUN echo "deb http://archive.ubuntu.com/ubuntu xenial multiverse" >> /etc/apt/sources.list
 RUN echo "deb http://archive.ubuntu.com/ubuntu xenial-updates multiverse" >> /etc/apt/sources.list
 
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E5267A6C
-
-#apache2
-RUN echo "deb http://ppa.launchpad.net/ondrej/apache2/ubuntu xenial main" >> /etc/apt/sources.list
-RUN echo "deb-src http://ppa.launchpad.net/ondrej/apache2/ubuntu xenial main " >> /etc/apt/sources.list
-
-RUN sed -i 's/archive.ubuntu.com/jp.archive.ubuntu.com/g' /etc/apt/sources.list
+#RUN sed -i 's/archive.ubuntu.com/jp.archive.ubuntu.com/g' /etc/apt/sources.list
 # 先更新apt-get
 RUN apt-get update && apt-get dist-upgrade -y
 
@@ -28,7 +22,7 @@ RUN apt-get install apache2-bin apache2-data apache2 php libapache2-mod-php php-
 RUN rm -Rf /var/www/html
 
 RUN apt-get install git -y
-RUN git clone https://github.com/lolihui/KODExplorer.git  /var/www/html
+RUN git clone https://github.com/huihuimoe/KODExplorer.git  /var/www/html
 
 
 # 安装aria2
@@ -44,6 +38,6 @@ WORKDIR /var/www/html/comic
 VOLUME /var/www/html/comic
 
 
-EXPOSE 80 6800 443
+EXPOSE 80 6800
 
 CMD /cldata/init.sh
