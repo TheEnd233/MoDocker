@@ -17,11 +17,13 @@ modo动漫私有云（modo.moe）的Docker构建用文件。
 * 使用 KODExplorer 作为桌面工具，提供 WebOS 级别的文件管理体验，自带的播放器可以在线播放动画，没事你还可以换桌面玩。
 * 和文件管理器深度整合的 Modo 漫画浏览器，能对图片进行压缩，方便支持通过浏览器和手机进行浏览。
 
+~~此版本是为了消除某人的ssl强迫症而存在~~
+
 # 修改
-* 使用php7.0，性能更好
-* 尽可能删除带有http协议的js/css/xhr资源
-* 使用token验证
-* token密码不再储存在yaaw.js中，储存于downlaod.html，运行后请及时更改download.html的文件名
+* 使用 php7 ，性能更好
+* 尽可能删除带有 http 协议的 `js/css/xhr` 资源
+* 使用 `token` 验证
+* `token` 密码不再储存在 `yaaw.js` 中，储存于 `downlaod.html` ，运行后请及时更改 `download.html` 的文件名
 
 # 构建
 ```bash
@@ -34,15 +36,15 @@ sudo docker build -t modo MoDocker
 sudo docker run -d -p 6801:80 -p 6800:6800 -v /data/comic:/var/www/html/comic modo
 ```
 
-或者你也可以使用灰灰构建的image
+或者你也可以使用灰灰构建的 image
 
 ```bash
 sudo docker run -d -p 6801:80 -p 6800:6800 -v /data/comic:/var/www/html/comic huihuimoe/modo
 ```
 
-然后需要再本机运行nginx，nginx的安装也不再多说……
+然后需要再本机运行 nginx ， nginx 的安装也不再多说……
 
-在nginx中加入如下配置，请按自身条件修改，不需要ssl的去掉ssl即可
+在 nginx 中加入如下配置，请按自身条件修改，不需要 ssl 的去掉 ssl 即可
 
 ```
 server {
@@ -87,3 +89,7 @@ server {
     }
 }
 ```
+
+## 提示
+
+请 __务必__ 更改 `download.html` 的文件名！！
