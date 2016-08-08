@@ -9,6 +9,7 @@ MAINTAINER HuiHui <0w0@loli.pet>
 #RUN echo "deb http://archive.ubuntu.com/ubuntu xenial-updates multiverse" >> /etc/apt/sources.list
 
 #RUN sed -i 's/archive.ubuntu.com/jp.archive.ubuntu.com/g' /etc/apt/sources.list
+RUN sed -i 's/main/main non-free/g' /etc/apt/sources.list
 # 先更新系统
 RUN apt-get update && apt-get dist-upgrade -y
 

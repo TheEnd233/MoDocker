@@ -25,12 +25,18 @@ modo动漫私有云（modo.moe）的Docker构建用文件。
 # 构建
 ```bash
 git clone https://github.com/huihuimoe/MoDocker
-docker build -t modo MoDocker
+sudo docker build -t modo MoDocker
 ```
 
 # 运行
 ```bash
-docker run -d -p 6801:80 -p 6800:6800 -v /data/comic:/var/www/html/comic modo
+sudo docker run -d -p 6801:80 -p 6800:6800 -v /data/comic:/var/www/html/comic modo
+```
+
+或者你也可以使用灰灰构建的image
+
+```bash
+sudo docker run -d -p 6801:80 -p 6800:6800 -v /data/comic:/var/www/html/comic huihuimoe/modo
 ```
 
 然后需要再本机运行nginx，nginx的安装也不再多说……
