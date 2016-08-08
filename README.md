@@ -9,6 +9,7 @@ modo动漫私有云（modo.moe）的Docker构建用文件。
 原帖： [v2ex](https://www.v2ex.com/t/225714?p=2)
 
 视频说明： [土豆](http://www.tudou.com/programs/view/9gS3imQGw6g/)
+
 # 功能说明：
 
 * 免配置，一行代码即可安装完成。
@@ -41,4 +42,48 @@ sudo docker run -d -p 6801:80 -p 6800:6800 -v /data/comic:/var/www/html/comic hu
 
 然后需要再本机运行nginx，nginx的安装也不再多说……
 
-在nginx中加入如下配置，请按自身条件修改
+在nginx中加入如下配置，请按自身条件修改，不需要ssl的去掉ssl即可
+
+```
+server {
+    listen                       443 ssl http2 spdy; # http2 和 spdy 请注意修改
+    server_name                  your_domain;
+    server_tokens                off;
+    ssl_certificate              /path/to/your_domain.cer;
+    ssl_certificate_key          /path/to/your_domain.key;
+    ssl_ciphers                  EECDH+AES128:RSA+AES128:EECDH+AES256:RSA+AES256:EECDH+3DES:RSA+3DES:!MD5;
+    ssl_prefer_server_ciphers    on;
+    ssl_protocols                TLSv1 TLSv1.1 TLSv1.2;
+    ssl_stapling                 on;
+    ssl_stapling_verify          on;
+    ssl_session_cache            shared:SSL:50m;
+    ssl_session_timeout          1d;
+    # ssl_session_tickets          on;
+    # ssl_session_ticket_key       /path/to/ssl/session_ticket.key;
+    # ssl_dhparam                  /path/to/dhparams.pem;
+    # access_log                   /path/to/your_domain.log;
+    location / {
+        proxy_set_header         Host $host;
+        proxy_max_temp_file_size 128m;
+        proxy_pass               http://127.0.0.1:6801/;
+    }
+    location /jsonrpc {
+        proxy_pass               http://127.0.0.1:6800/jsonrpc;
+    }
+}
+
+server {
+    server_name       your_domain;
+    server_tokens     off;
+
+    access_log        /dev/null;
+
+    if ($request_method !~ ^(GET|HEAD|POST)$ ) {
+        return        444;
+    }
+
+    location / {
+        rewrite       ^/(.*)$ https://your_domain/$1 permanent;
+    }
+}
+```
