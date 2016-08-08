@@ -59,7 +59,7 @@ server {
     ssl_session_cache            shared:SSL:50m;
     ssl_session_timeout          1d;
     # ssl_session_tickets          on;
-    # ssl_session_ticket_key       /path/to/ssl/session_ticket.key;
+    # ssl_session_ticket_key       /path/to/session_ticket.key;
     # ssl_dhparam                  /path/to/dhparams.pem;
     # access_log                   /path/to/your_domain.log;
     location / {
